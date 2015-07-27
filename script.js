@@ -37,21 +37,11 @@
 
       self.regions.$mainRegion.empty();
 
-      var $row = null;
+      var $row = $("<div>").addClass("row");
       for(var i=0; i< self.products.length ; i++){
-        
-        if (i % 3 == 0 ) {
-          $row = $("<div>").addClass("row");
-          console.log("START");
-        }
-
         $row.append(self.products[i].render());
-
-        if ((i % 3 == 2) || i == (self.products.length-1)) {
-          self.regions.$mainRegion.append($row);
-          console.log("FINISH");
-        }
       }
+      self.regions.$mainRegion.append($row);
     }
 
     function Product(product, i) {
@@ -62,7 +52,6 @@
       self.tagline      = product.tagline;
       self.url          = product.url;
       self.index        = i;
-      self.custom_class = "col"+ ((i % 3) +1);
 
       self.$elem = null;
     }
@@ -74,8 +63,7 @@
         image: self.photo,
         title: self.title,
         tagline: self.tagline,
-        url: self.url,
-        custom_class: self.custom_class
+        url: self.url
       }
 
       var htmlView = _template(productTemplateHtml, param);
