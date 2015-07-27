@@ -1,8 +1,13 @@
+/* Loading Google Webfont */
+@import url(http://fonts.googleapis.com/css?family=Monda:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
+@import url(http://fonts.googleapis.com/css?family=Dosis:300,400);
+
 
 /* General */
 
 body {
-  font-family: "Arial";
+  font-family: "Arial", sans-serif;
   background-image: url("img/brillant.png");
 }
 
@@ -14,7 +19,12 @@ a:visited {
   text-decoration: none;
 }
 
-/* Page title & subtitle */
+/* Page Title & Subtitle */
+
+.page-title,
+.page-subtitle {
+  font-family: "Monda", sans-serif;
+}
 
 .page-title {
   margin: 30px 0;
@@ -22,12 +32,13 @@ a:visited {
 }
 
 .page-subtitle { 
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   font-style: italic;
   height: 18px
 }
 
-/* Product items */
+/* Product Items */
+
 .product-container {
   margin-bottom: 15px;
 }
@@ -54,14 +65,16 @@ a:visited {
 }
 
 .product-container .title {
+  font-family: 'Open Sans', sans-serif;
   padding-bottom: 28px;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .product-container .tagline {
-  font-style: italic;
   padding-bottom: 12px;
+  font-family: 'Dosis', sans-serif;
+  font-style: italic;
 }
 
 /* Product Overlay Description */
@@ -69,14 +82,19 @@ a:visited {
 .overlay {
   position: absolute;
   z-index: 3;
-  padding: 10px;
   height: 100%;
+  padding: 10px;
   overflow: hidden;
+
+  color: #F8F8F8;
+  background: #2D2D2D;
+
+  font-family: 'Dosis', sans-serif;
+  font-size: 16px;
   font-weight: 100;
   line-height: normal;
   letter-spacing: 1px;
-  color: #F8F8F8;
-  background: #2D2D2D;
+
   opacity: 0;
   transition: opacity .50s ease;
    -moz-transition: opacity .50s ease;
@@ -87,20 +105,20 @@ a:visited {
   opacity: 0.9;
 }
 
-/* Remove button */
+/* Remove Button */
 
 .action-remove {
-  margin: -10px -7px 0 0;
   float: right;
-  width: 18px;
-  text-align: center;
   z-index: 5;
-  opacity: 0.3;
-  color: white;
+  width: 18px;
   padding: 3px;
+  margin: -10px -7px 0 0;
+
+  color: white;
   font-size: 16px;
   font-weight: bold;
 
+  opacity: 0.3;
   transition: opacity .30s ease;
    -moz-transition: opacity .30s ease;
    -webkit-transition: opacity .30s ease;
@@ -111,7 +129,7 @@ a:visited {
   color: white;
 }
 
-/* Animation for removing product */
+/* Animation for Removing Product */
 
 @-webkit-keyframes tvOut {
   0% {
@@ -151,3 +169,26 @@ a:visited {
   -webkit-animation-name: tvOut;
   animation-name: tvOut;
 }
+
+
+/* Responsive Typography */
+
+@media (min-width:767px) and (max-width: 991px) {
+  .page-title {
+    font-size: 32px;
+  }
+}
+
+@media (min-width:992px) and (max-width: 1200px) {
+  .overlay {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  .page-title {
+    font-size: 26px;
+  }
+}
+
+

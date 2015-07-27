@@ -54,7 +54,7 @@
 
         var self = this;
         $container.on("animationend", function() {
-          $container.hide();
+          $container.remove();
           $container.off("animationend");
         });
         $container.addClass("tvOut");
@@ -86,6 +86,7 @@
       }
 
       var htmlView = _template(productTemplateHtml, param);
+
       self.$elem.html(htmlView);
 
       return self.$elem;
