@@ -1,10 +1,13 @@
 (function(global) {
 
-  var requestData = $.getJSON('data.json').done(function(products) {
-    var requestProductTemplate = $.get('product-template.html').done(function(template) {
+  var _template = function(str, param) {
+    return str.replace(/\{(.*?)\}/g, function(match, token) {
+      return param[token];
+    });
+  }
 
-      var data = products;
-      var template = template;
+  var requestData = $.getJSON('data.json').done(function(productData) {
+    var requestProductTemplate = $.get('product-template.html').done(function(productTemplateHtml) {
 
       function TOMApp() {
         this.products = [];
@@ -12,13 +15,13 @@
 
       TOMApp.prototype.getproducts = function() {
         var self = this;
-        for (i=0; i<data.sales.length ; i++) {
-          self.products.push(new productobj(data.sales[i], i)  );
+        for (var i=0; i<productData.sales.length ; i++) {
+          self.products.push(new productobj(productData.sales[i], i)  );
         }
       }
 
       TOMApp.prototype.updateproducthtml = function() {
-        for( i=0; i< this.products.length ; i++){
+        for(var i=0; i< this.products.length ; i++){
           this.products[i].updatehtml();
         }
       }
@@ -53,12 +56,16 @@
 
       productobj.prototype.updatehtml = function() {
         var self = this;
-        self.htmlview = 
-          template.replace('{image}', self.photo)
-                  .replace('{title}', self.title)
-                  .replace('{tagline}', self.tagline)
-                  .replace('{url}', self.url)
-                  .replace('{custom_class}', self.custom_class);
+
+        var param = {
+          image: self.photo,
+          title: self.title,
+          tagline: self.tagline,
+          url: self.url,
+          custom_class: self.custom_class
+        }
+
+        self.htmlview = _template(productTemplateHtml, param);
       }
 
       var page = new TOMApp();
