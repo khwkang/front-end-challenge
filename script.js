@@ -35,13 +35,30 @@
     TOMApp.prototype.render = function() {
       var self = this;
 
+      // reset the region
       self.regions.$mainRegion.empty();
+      $(".action-remove").off("click"); // prevent memory leaking
 
+      // rendering
       var $row = $("<div>").addClass("row");
-      for(var i=0; i< self.products.length ; i++){
+      for(var i=0; i < self.products.length ; i++){
         $row.append(self.products[i].render());
       }
       self.regions.$mainRegion.append($row);
+
+      // attach event handlers for removing product button 
+      $(".action-remove").on("click", function(){
+        event.preventDefault();
+
+        var $container = $(this).closest(".product-container");
+
+        var self = this;
+        $container.on("animationend", function() {
+          $container.hide();
+          $container.off("animationend");
+        });
+        $container.addClass("tvOut");
+      });
     }
 
     function Product(product, i) {
@@ -52,7 +69,7 @@
       self.url          = product.url;
       self.description  = product.description;
       self.index        = i;
-      self.$elem = null;
+      self.$elem         = $("<div>").addClass("product-view-container");
     }
 
     Product.prototype.render = function() {
@@ -67,14 +84,8 @@
       }
 
       var htmlView = _template(productTemplateHtml, param);
+      self.$elem.html(htmlView);
 
-      if (self.$elem) {
-        // instantiated already, just update html
-        self.$elem.html(htmlView);
-      } else {
-        // Instantiation of the jQuery object
-        self.$elem = $(htmlView);
-      }
       return self.$elem;
     }
 
