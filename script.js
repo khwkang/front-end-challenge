@@ -59,6 +59,8 @@
         });
         $container.addClass("tvOut");
       });
+      // hide the loading gif when finished rendering
+      $(".loading").addClass("hidden");
     }
 
     function Product(product, i) {
