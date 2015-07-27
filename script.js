@@ -19,8 +19,8 @@
       }
 
       self.products = [];
-
       self.initProducts();
+
       self.render();
     }
 
@@ -46,13 +46,12 @@
 
     function Product(product, i) {
       var self = this;
-
       self.photo        = product.photos.medium_half;
       self.title        = product.name;
       self.tagline      = product.tagline;
       self.url          = product.url;
+      self.description  = product.description;
       self.index        = i;
-
       self.$elem = null;
     }
 
@@ -63,7 +62,8 @@
         image: self.photo,
         title: self.title,
         tagline: self.tagline,
-        url: self.url
+        url: self.url,
+        description: self.description
       }
 
       var htmlView = _template(productTemplateHtml, param);
@@ -75,7 +75,6 @@
         // Instantiation of the jQuery object
         self.$elem = $(htmlView);
       }
-
       return self.$elem;
     }
 

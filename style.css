@@ -61,4 +61,28 @@ a:visited {
 
 .product-container .tagline {
   font-style: italic;
+  padding-bottom: 12px;
+}
+
+/* Product Overlay Description */
+
+.overlay {
+  position: absolute;
+  z-index: 3;
+  padding: 10px;
+  height: 100%;
+  overflow: hidden;
+  font-weight: 100;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: #F8F8F8;
+  background: #2D2D2D;
+  opacity: 0;
+  transition: opacity .50s ease;
+   -moz-transition: opacity .50s ease;
+   -webkit-transition: opacity .50s ease;
+}
+
+.overlay:hover {
+  opacity: 0.9;
 }
