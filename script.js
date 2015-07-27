@@ -19,8 +19,8 @@
       }
 
       self.products = [];
-
       self.initProducts();
+
       self.render();
     }
 
@@ -35,25 +35,43 @@
     TOMApp.prototype.render = function() {
       var self = this;
 
+      // reset the region
       self.regions.$mainRegion.empty();
+      $(".action-remove").off("click"); // prevent memory leaking
 
+      // rendering
       var $row = $("<div>").addClass("row");
-      for(var i=0; i< self.products.length ; i++){
+      for(var i=0; i < self.products.length ; i++){
         $row.append(self.products[i].render());
       }
       self.regions.$mainRegion.append($row);
+
+      // attach event handlers for removing product button 
+      $(".action-remove").on("click", function(){
+        event.preventDefault();
+
+        var $container = $(this).closest(".product-container");
+
+        var self = this;
+        $container.on("animationend", function() {
+          $container.remove();
+          $container.off("animationend");
+        });
+        $container.addClass("tvOut");
+      });
+      // hide the loading gif when finished rendering
+      $(".loading").addClass("hidden");
     }
 
     function Product(product, i) {
       var self = this;
-
       self.photo        = product.photos.medium_half;
       self.title        = product.name;
       self.tagline      = product.tagline;
       self.url          = product.url;
+      self.description  = product.description;
       self.index        = i;
-
-      self.$elem = null;
+      self.$elem         = $("<div>").addClass("product-view-container");
     }
 
     Product.prototype.render = function() {
@@ -63,18 +81,13 @@
         image: self.photo,
         title: self.title,
         tagline: self.tagline,
-        url: self.url
+        url: self.url,
+        description: self.description
       }
 
       var htmlView = _template(productTemplateHtml, param);
 
-      if (self.$elem) {
-        // instantiated already, just update html
-        self.$elem.html(htmlView);
-      } else {
-        // Instantiation of the jQuery object
-        self.$elem = $(htmlView);
-      }
+      self.$elem.html(htmlView);
 
       return self.$elem;
     }
