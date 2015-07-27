@@ -1,13 +1,64 @@
-body{font-family: "Arial"}
-a{text-decoration: none;}
 
-.product-container{width:300px; border:1px solid #aaa; margin:10px; display:inline-block;}
-.product-container img{width:100%; height:auto;}
-.row{width:946px;}
+/* General */
 
-.col1{float:left;}
-.col2{margin:10px auto;}
-.col3{float:right;}
+body {
+  font-family: "Arial";
+  background-image: url("img/brillant.png");
+}
 
-.title{font-size:20px;}
-.description{padding:10px;}
+a,
+a:link,
+a:visited {
+  border: 1px solid #EDEDED;
+  color: #0096FF;
+  text-decoration: none;
+}
+
+/* Page title & subtitle */
+
+.page-title {
+  margin: 20px 0;
+  height: 36px;
+}
+
+.page-subtitle { 
+  margin-bottom: 25px;
+  font-style: italic;
+  height: 18px
+}
+
+/* Product items */
+.product-container {
+  margin-bottom: 15px;
+}
+
+.product-container a {
+  display: block;
+  position: relative;
+  border: 1px solid #EDEDED;
+}
+
+.product-container img {
+  width: 100%; 
+  height: auto;
+}
+
+.product-container .description {
+  padding: 16px 0 20px 0;
+  background: #F6F6F6
+}
+
+.product-container .title, .tagline {
+  height: 16px;
+  font-size: 16px
+}
+
+.product-container .title {
+  padding-bottom: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product-container .tagline {
+  font-style: italic;
+}
